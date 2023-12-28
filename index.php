@@ -1,39 +1,46 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location: ./login.php');
+    header('Location: ./login');
     exit;
 }
 
-if (isset($_POST['logout'])) {
+if (isset($_POST['abmelden'])) {
     session_unset();
     $_SESSION['loggedin'] = false;
     session_destroy();
-    header('Location: ./login.php');
+    header('Location: ./login');
     exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<link rel="stylesheet" href="/admin/static/style.css">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
 </head>
 
 <body>
+
+    <!-- ----- Adminpanel Status ------------------------- -->
     <header>
-        <?php
-        if (isset($_SESSION['username'])) : ?>
-            <p> Account: <?php echo $_SESSION['username']; ?></p>
+        <?php if (isset($_SESSION['username'])) : ?>
+            <p>Account: <?php echo $_SESSION['username']; ?></p>
         <?php endif; ?>
     </header>
+    <!-- ----- INFOS ------------------------- -->
     <main>
         <h1>AdminPanel</h1>
-        <p>Nur für Admins!</p>
+        <p>Hier ist die Adminseite!</p>
     </main>
+    <!-- ----- Abmelden ------------------------- -->
+    <footer>
+        <form method="post" action="">
+            <input type="submit" name="abmelden" value="Abmelden">
+        </form>
+    </footer>
 </body>
 
 </html>
